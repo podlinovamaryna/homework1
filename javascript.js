@@ -15,12 +15,10 @@ let appData = {
     expenses: {},
     optionalExpenses: {},
     income: [],
-    savings: true
-};
-
-function chooseExpenses(){
-for (let i = 0; i < 2; i++)
-{
+    savings: true,
+    chooseExpenses:function(){
+       for (let i = 0; i < 2; i++)
+      {
    let a = prompt( "Введите обязательную статью расходов в этом месяце", "Продукты" );
    let b = +prompt("Во сколько обойдется?", "10000");
    if((typeof(a) === "string") && (typeof(a) != null) && 
@@ -30,10 +28,10 @@ for (let i = 0; i < 2; i++)
    }else{
        i=i-1;
    }
-}
-}
-function chooseOptExpenses(){
-    for( let i = 1; i < 4; i++){
+   } 
+    },
+    chooseOptExpenses:function(){
+for( let i = 1; i < 4; i++){
     let a = prompt( "Статья необязательных расходов?");
     if( typeof(a) === "string" && typeof(a) != null && a!= "" && a.length <70){
     appData.optionalExpenses[i] = a;
@@ -41,15 +39,12 @@ function chooseOptExpenses(){
         i=i-1;
     }
     }
-}
- chooseExpenses();
- function detectDayBudget(){
-     appData.moneyPerDay = (appData.budget/30).toFixed();
-     alert("Ваш ежедневный бюджет: " + appData.moneyPerDay);
- }
-//detectDayBudget();
-
-function detectLevel(){
+    },
+    detectDayBudget: function(){
+    appData.moneyPerDay = (appData.budget/30).toFixed();
+    alert("Ваш ежедневный бюджет: " + appData.moneyPerDay);
+    },
+    detectLevel:function(){
 if(appData.moneyPerDay < 100){
     alert("Минимальный уровень достатка");
 }else if(appData.moneyPerDay >=100 && appData.moneyPerDay < 2000){
@@ -60,11 +55,9 @@ else if(appData.moneyPerDay > 2000){
 }else{
     alert("Ошибка");
 }
-}
-//detectLevel();
-
-function checkSavings (){
-    if(appData.savings == true)
+    },
+    checkSavings:function(){
+if(appData.savings == true)
     {
         let save = +prompt("Какова сумма накоплений?");
         while(isNaN(save) ||save  == "" || save == null){
@@ -77,6 +70,46 @@ function checkSavings (){
         appData.mounthIncome = save/100/12 *percent;
         alert("Сумма Ваших начислений с депозита: "+ appData.mounthIncome);
     }
+    },
+    /*chooseIncome:function(){
+        let items = prompt("Что принесет дополнительный доход? (Введите через запятую)",""),
+            way,inc = "";
+        for(let i = 0; i < 1; i++){
+        if(typeof(items) === "string" && typeof(items)!= null && items != ""){
+        appData.income = items.split(", ");
+        }else{
+            i = i - 1;
+        }
+        }
+        way = "Способы дополнительного заработка: ";
+        appData.income.forEach(function(i, item, mass ) {
+         inc += ((i+1) + ": " + item + ";\n");
+               console.log(inc);
+        });
+        console.log(inc);
+    }*/
+   };
+   function chooseIncome(){
+    let items = prompt("Что принесет дополнительный доход? (Введите через запятую )",""),
+        way;
+    for(let i = 0; i < 1; i++){
+    if(typeof(items) === "string" && typeof(items)!= null && items != ""){
+    appData.income = items.split(",");
+    }else{
+        i = i - 1;
+    }
+    }
+    let i = 1;
+    way = "Способы дополнительного заработка:\n";
+    appData.income.forEach(function( item, mass ) {
+        way =way + ((i) + ": " + item + ";\n");
+           i++;
+    });
+    alert(way);
 }
- 
-//checkSavings();
+for(let key in appData){
+    console.log(key);
+}
+
+
+
