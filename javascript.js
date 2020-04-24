@@ -107,9 +107,6 @@ if(appData.savings == true)
     });
     alert(way);
 }
-for(let key in appData){
-    console.log(key);
-}
 
 
 
